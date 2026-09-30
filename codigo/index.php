@@ -6,6 +6,15 @@
     <title>Document</title>
 </head>
 <body>
-    <a href="listar_postagem.php">Ver postagens</a>
+    <form action="verificar_login.php" method="post">
+        E-mail: <br>
+        <input type="text" name="email"> <br><br>
+        Senha: <br>
+        <input type="text" name="senha"> <br><br>
+
+        <input type="submit" value="Logar">
+
+        <a href="">Não tem conta? Crie agora!</a>
+    </form>
 </body>
 </html>
