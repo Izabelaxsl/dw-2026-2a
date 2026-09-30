@@ -6,15 +6,19 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="verificar_login.php" method="post">
+    <form action="salvar_usuario.php" method="post">
+        Nome: <br>
+        <input type="text" name="nome"> <br><br>
+        Apelido: <br>
+        <input type="text" name="apelido"> <br><br>
         E-mail: <br>
         <input type="text" name="email"> <br><br>
         Senha: <br>
         <input type="text" name="senha"> <br><br>
+        Foto: <br>
+        <input type="text" name="foto"> <br><br>
 
-        <input type="submit" value="Logar">
-
-        <a href="form_usuario.php">Não tem conta? Crie agora!</a>
+        <input type="submit" value="Cadastrar">
     </form>
 </body>
 </html>

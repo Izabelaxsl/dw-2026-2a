@@ -1,3 +1,5 @@
+
+<!-- é preciso implementar a verificação de sessão no arquivo verificar_sessao.php -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +8,7 @@
     <title>Document</title>
 </head>
 <body>
-    <a href="listar_postagem.php">Ver postagens</a>
+    <a href="listar_postagem.php">Ver postagens</a> <br>
+    <a href="deslogar.php">Sair...</a>
 </body>
 </html>
