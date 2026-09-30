@@ -1,5 +1,6 @@
-
-<!-- é preciso implementar a verificação de sessão no arquivo verificar_sessao.php -->
+<?php
+    require_once "verificar_sessao.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
