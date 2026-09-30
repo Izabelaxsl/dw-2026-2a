@@ -34,7 +34,9 @@
         <?php
         require_once "conexao.php";
 
-        $sql = "SELECT * FROM postagem";
+        $sql = "SELECT postagem.idpostagem, postagem.texto, postagem.data_hora, usuario.idusuario, usuario.nome, usuario.apelido, usuario.foto
+        FROM postagem, usuario
+        WHERE postagem.idusuario = usuario.idusuario;";
 
         $resultados = mysqli_query($conexao, $sql);
 
@@ -44,12 +46,9 @@
             $data_hora = $linha['data_hora'];
             $idusuario = $linha['idusuario'];
 
-            $sql2 = "SELECT * FROM usuario WHERE idusuario = $idusuario";
-            $resultado = mysqli_query($conexao, $sql2);
-            $usuario = mysqli_fetch_array($resultado);
-
-            $foto = $usuario['foto'];
-            $nome = $usuario['nome'];
+            $foto = $linha['foto'];
+            $nome = $linha['nome'];
+            $apelido = $linha['apelido'];
 
             echo "<div class='postagem'>";
 
@@ -62,11 +61,16 @@
             echo $texto;
 
             //caixa dos comentarios
-            $sql3 = "SELECT * FROM comentario WHERE idpostagem = $idpostagem";
+            $sql3 = "SELECT comentario.idcomentario, comentario.idpostagem, comentario.texto, usuario.idusuario, usuario.nome, usuario.apelido, usuario.foto
+            FROM comentario, usuario
+            WHERE idpostagem = $idpostagem
+            AND comentario.idusuario = usuario.idusuario
+            ORDER BY comentario.idcomentario ASC;";
+
             $comentarios = mysqli_query($conexao, $sql3);
 
             if (mysqli_num_rows($comentarios) == 0) {
-                echo "Essa postagem não possui comentários.";
+                echo "<br>Essa postagem não possui comentários.";
             } else {
                 echo "<div class='comentarios'>";
                 // listar comentários aqui
@@ -75,31 +79,22 @@
                     $idusuario_comentario = $comentario['idusuario'];
                     $texto_comentario = $comentario['texto'];
 
-                    $sql4 = "SELECT * FROM usuario WHERE idusuario = $idusuario_comentario";
-                    $resultado = mysqli_query($conexao, $sql4);
-                    $usuario = mysqli_fetch_array($resultado);
-
-                    $foto_usuario_comentario = $usuario['foto'];
+                    $foto_usuario_comentario = $comentario['foto'];
 
                     echo "<div>";
                     echo "<img src='imagem_usuario/$foto_usuario_comentario'>";
                     echo $texto_comentario;
-
-
                     echo "</div>";
                 }
-                ?>
-                
+        ?>
                 <form action="salvar_comentario.php">
                     <input type="text">
                     <input type="submit" value="Comentar">
                 </form>
 
-                <?php
+        <?php
                 echo "</div>";
             }
-
-
             echo "</div>";
         }
         ?>
