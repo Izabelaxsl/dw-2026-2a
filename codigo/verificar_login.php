@@ -14,6 +14,7 @@ if ($quantidade == 1) {
     $usuario = mysqli_fetch_array($resultado);
 
     session_start();
+    $_SESSION['idusuario'] = $usuario['idusuario'];
     $_SESSION['nome'] = $usuario['nome'];
     $_SESSION['apelido'] = $usuario['apelido'];
     $_SESSION['email'] = $usuario['email'];
