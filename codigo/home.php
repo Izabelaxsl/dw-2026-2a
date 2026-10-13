@@ -11,6 +11,7 @@
 <body>
     <a href="form_postagem.php">Nova postagem</a> <br>
     <a href="listar_postagem.php">Ver postagens</a> <br>
+    <a href="listagem_usuario.php">usuarios</a> <br>
     <a href="deslogar.php">Sair...</a>
 </body>
 </html>
