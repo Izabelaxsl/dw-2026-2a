@@ -14,10 +14,38 @@ require_once "verificar_sessao.php";
 </head>
 
 <body>
-    <a href="form_postagem.php">Nova postagem</a> <br>
-    <a href="listar_postagem.php">Ver postagens</a> <br>
-    <a href="listagem_usuario.php">usuarios</a> <br>
-    <a href="deslogar.php">Sair...</a>
+    <div class="container mt-5">
+        <div class="card shadow border-0 rounded-4 mx-auto p-4" style="max-width: 500px;">
+
+            <h2 class="text-center text-primary mb-2">Página Inicial</h2>
+            <p class="text-center text-secondary mb-4">
+
+            </p>
+
+            <label class="form-label fw-bold">Menu principal</label>
+
+            <a href="form_postagem.php"
+                class="form-control mb-3 text-decoration-none text-primary">
+                Nova postagem
+            </a>
+
+            <a href="listar_postagem.php"
+                class="form-control mb-3 text-decoration-none text-success">
+                Ver postagens
+            </a>
+
+            <a href="listagem_usuario.php"
+                class="form-control mb-4 text-decoration-none text-dark">
+                Usuários cadastrados
+            </a>
+
+            <a href="deslogar.php"
+                class="btn btn-outline-danger w-100">
+                Sair
+            </a>
+
+        </div>
+    </div>
 </body>
 
 </html>
