@@ -29,10 +29,11 @@ require_once "conexao.php";
         $foto = $usuario['foto'];
 
         echo "<img src='$foto'>";
-        echo"<br>";
+        
         echo "<p class=''>$nome</p>";
 
         echo "<a href='salvar_seguir.php?id=$idusuario_seguir'> seguir </a>";
+        echo"<br>";
     }
 }
     ?>
