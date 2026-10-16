@@ -20,22 +20,30 @@ require_once "conexao.php";
     $sql = "SELECT idusuario,nome,foto FROM usuario";
 
     $resultado = mysqli_query($conexao, $sql);
-    
-        while ($usuario = mysqli_fetch_array($resultado)){
 
-        if ($usuario ['idusuario'] != $_SESSION['idusuario']){
-        $idusuario_seguir = $usuario['idusuario'];
-        $nome = $usuario['nome'];
-        $foto = $usuario['foto'];
+    while ($usuario = mysqli_fetch_array($resultado)) {
 
-        echo "<img src='$foto'>";
-        
-        echo "<p class=''>$nome</p>";
+        if ($usuario['idusuario'] != $_SESSION['idusuario']) {
+            $idusuario_seguir = $usuario['idusuario'];
+            $nome = $usuario['nome'];
+            $foto = $usuario['foto'];
 
-        echo "<a href='salvar_seguir.php?id=$idusuario_seguir'> seguir </a>";
-        echo"<br>";
+            echo "<img src='$foto'>";
+
+            echo "<p class=''>$nome</p>";
+
+            $validacao = mysqli_query($conexao, " SELECT * FROM seguir where idseguidor = "  . $_SESSION['idusuario'] . " AND idseguindo = " . $idusuario_seguir);
+
+            if (mysqli_num_rows($validacao) > 0) {
+                echo "<a href='salvar_seguir.php?id=$idusuario_seguir'>deixar de seguir</a>";
+            } else {
+                echo "<a href='salvar_seguir.php?id=$idusuario_seguir'> seguir </a>";
+            }
+
+
+            echo "<br>";
+        }
     }
-}
     ?>
 </body>
 
