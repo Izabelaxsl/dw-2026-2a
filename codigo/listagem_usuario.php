@@ -21,18 +21,21 @@ require_once "conexao.php";
     $sql = "SELECT idusuario,nome,foto FROM usuario";
 
     $resultado = mysqli_query($conexao, $sql);
+    
+        while ($usuario = mysqli_fetch_array($resultado)){
 
-    while ($usuario = mysqli_fetch_array($resultado)) {
-        $idusuario = $usuario['idusuario'];
+        if ($usuario ['idusuario'] != $_SESSION['idusuario']){
+        $idusuario_seguir = $usuario['idusuario'];
         $nome = $usuario['nome'];
         $foto = $usuario['foto'];
 
         echo "<img src='$foto'>";
         echo"<br>";
         echo "<p class=''>$nome</p>";
-        echo "<a href='salvar_.php?id=$idusuario'> seguir </a>";
-    }
 
+        echo "<a href='salvar_seguir.php?id=$idusuario_seguir'> seguir </a>";
+    }
+}
     ?>
 </body>
 
