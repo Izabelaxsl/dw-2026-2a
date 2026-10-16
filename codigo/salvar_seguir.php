@@ -1,17 +1,17 @@
-<?php
-require_once "verificar_sessao.php";
+<?php 
 
-session_start();
+
+
+
+require_once "verificar_sessao.php";
 require_once "conexao.php";
 
-$validacao = "SELECTE FROM seguir WHERE idseguidor = $_SESSION['idusuario_logado'] and idseguindo = $seguidor_seguir";
+$seguir = $_GET['id'];
+$idusuario_seguindo= $_SESSION['idusuario'];
 
-$idusuario_logado = $_SESSION['idusuario_logado'];
-
-
-$sql = "INSERT INTO seguir (idusuario_logado, idusuario_seguir, idusuario_seguindo) VALUES ('$idusuario_logado', '$idusuario_seguir', '$idusuario_seguindo')";
+$sql = "INSERT INTO seguir (idseguidor, idseguindo) VALUES ('$seguir', '$idusuario_seguindo')";
 
 mysqli_query($conexao, $sql);
 
-header("Location: index.php");
+header("Location: listagem_usuario.php");
 ?>
