@@ -1,8 +1,4 @@
 <?php 
-
-
-
-
 require_once "verificar_sessao.php";
 require_once "conexao.php";
 

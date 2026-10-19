@@ -71,7 +71,7 @@ require_once "conexao.php";
                                     <?php if ($seguindo) { ?>
 
                                         <a
-                                            href="salvar_seguir.php?id=<?= $idusuario_seguir ?>"
+                                            href="excluir_seguidor.php?id=<?= $idusuario_seguir ?>"
                                             class="btn btn-outline-danger btn-sm">
                                             Deixar de seguir
                                         </a>
