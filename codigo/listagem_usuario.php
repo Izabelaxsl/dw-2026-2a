@@ -47,6 +47,10 @@ require_once "conexao.php";
                     );
 
                     $seguindo = mysqli_num_rows($validacao) > 0;
+
+                    $validacao_volta = mysqli_query($conexao, "SELECT * FROM seguir WHERE idseguidor = $idusuario_seguir AND idseguindo = $id_logado ");
+
+                    $segue_de_volta = mysqli_num_rows($validacao_volta) > 0;
             ?>
 
                     <div class="col-12 col-md-6 col-lg-4 mb-3" id="usuario<?= $idusuario_seguir ?>">
@@ -78,11 +82,22 @@ require_once "conexao.php";
 
                                     <?php } else { ?>
 
-                                        <a
-                                            href="salvar_seguir.php?id=<?= $idusuario_seguir ?>"
-                                            class="btn btn-primary btn-sm">
-                                            Seguir
-                                        </a>
+                                        <?php if ($segue_de_volta) { ?>
+
+                                            <a href="salvar_seguir.php?id=<?= $idusuario_seguir ?>"
+                                                class="btn btn-primary btn-sm">
+                                                Seguir de volta
+                                            </a>
+
+                                        <?php } else { ?>
+
+                                            <a
+                                                href="salvar_seguir.php?id=<?= $idusuario_seguir ?>"
+                                                class="btn btn-primary btn-sm">
+                                                Seguir
+                                            </a>
+
+                                        <?php } ?>
 
                                     <?php } ?>
                                 </div>
