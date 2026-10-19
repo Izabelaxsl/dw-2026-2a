@@ -4,47 +4,105 @@ require_once "conexao.php";
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-B/GM4XqrwHnWXNOWMbloTmrYXZg10cakYGmpfsR/bbzQ6JAJI4ihuyADKLnBgrCe" crossorigin="anonymous">
-    <script type="module" src="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-1a/pXj49ZQ1aHEmrJ+gMw1otqoVsYwlEnlD8mIfY2TV03r20Y0CN7uqx1tQogjPL" crossorigin="anonymous"></script>
+    <title>Lista de Usuários</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
 </head>
 
-<body>
+<body class="bg-light">
 
-    <?php
-    $sql = "SELECT idusuario,nome,foto FROM usuario";
+    <div class="container py-5">
 
-    $resultado = mysqli_query($conexao, $sql);
+        <h2 class="text-center mb-4 fw-bold">
+            Lista de Usuários
+        </h2>
 
-    while ($usuario = mysqli_fetch_array($resultado)) {
+        <div class="row justify-content-center">
 
-        if ($usuario['idusuario'] != $_SESSION['idusuario']) {
-            $idusuario_seguir = $usuario['idusuario'];
-            $nome = $usuario['nome'];
-            $foto = $usuario['foto'];
+            <?php
+            $sql = "SELECT idusuario, nome, foto FROM usuario";
+            $resultado = mysqli_query($conexao, $sql);
 
-            echo "<img src='$foto'>";
+            while ($usuario = mysqli_fetch_array($resultado)) {
 
-            echo "<p class=''>$nome</p>";
+                if ($usuario['idusuario'] != $_SESSION['idusuario']) {
 
-            $validacao = mysqli_query($conexao, " SELECT * FROM seguir where idseguidor = "  . $_SESSION['idusuario'] . " AND idseguindo = " . $idusuario_seguir);
+                    $idusuario_seguir = (int) $usuario['idusuario'];
+                    $nome = htmlspecialchars($usuario['nome'], ENT_QUOTES, 'UTF-8');
+                    $foto = htmlspecialchars($usuario['foto'] ?? '', ENT_QUOTES, 'UTF-8');
 
-            if (mysqli_num_rows($validacao) > 0) {
-                echo "<a href='salvar_seguir.php?id=$idusuario_seguir'>deixar de seguir</a>";
-            } else {
-                echo "<a href='salvar_seguir.php?id=$idusuario_seguir'> seguir </a>";
+                    $id_logado = (int) $_SESSION['idusuario'];
+
+                    $validacao = mysqli_query(
+                        $conexao,
+                        "SELECT * FROM seguir
+                         WHERE idseguidor = $id_logado
+                         AND idseguindo = $idusuario_seguir"
+                    );
+
+                    $seguindo = mysqli_num_rows($validacao) > 0;
+            ?>
+
+                    <div class="col-12 col-md-6 col-lg-4 mb-3">
+
+                        <div class="card shadow-sm border-0 rounded-4 p-3">
+
+                            <div class="clearfix">
+
+                                <img
+                                    src="<?= $foto ?>"
+                                    alt="Foto de <?= $nome ?>"
+                                    class="rounded-circle float-start me-3"
+                                    width="65"
+                                    height="65"
+                                    style="object-fit: cover;">
+
+                                <div class="pt-1">
+                                    <h5 class="fw-bold mb-2">
+                                        <?= $nome ?>
+                                    </h5>
+
+                                    <?php if ($seguindo) { ?>
+
+                                        <a
+                                            href="salvar_seguir.php?id=<?= $idusuario_seguir ?>"
+                                            class="btn btn-outline-danger btn-sm">
+                                            Deixar de seguir
+                                        </a>
+
+                                    <?php } else { ?>
+
+                                        <a
+                                            href="salvar_seguir.php?id=<?= $idusuario_seguir ?>"
+                                            class="btn btn-primary btn-sm">
+                                            Seguir
+                                        </a>
+
+                                    <?php } ?>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+            <?php
+                }
             }
+            ?>
 
+        </div>
+    </div>
 
-            echo "<br>";
-        }
-    }
-    ?>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>
