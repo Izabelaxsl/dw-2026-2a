@@ -9,5 +9,5 @@ $sql = "INSERT INTO seguir (idseguidor, idseguindo) VALUES ('$idusuario_seguindo
 
 mysqli_query($conexao, $sql);
 
-header("Location: listagem_usuario.php");
+header("Location: listagem_usuario.php#usuario" . $_GET['id']);
 ?>

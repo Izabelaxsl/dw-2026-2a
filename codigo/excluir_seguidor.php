@@ -10,5 +10,5 @@ $idusuario_seguindo= $_SESSION['idusuario'];
 
 mysqli_query($conexao, $sql);
 
-header("Location: listagem_usuario.php");
+header("Location: listagem_usuario.php#usuario" . $_GET['id']);
 ?>

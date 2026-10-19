@@ -49,7 +49,7 @@ require_once "conexao.php";
                     $seguindo = mysqli_num_rows($validacao) > 0;
             ?>
 
-                    <div class="col-12 col-md-6 col-lg-4 mb-3">
+                    <div class="col-12 col-md-6 col-lg-4 mb-3" id="usuario<?= $idusuario_seguir ?>">
 
                         <div class="card shadow-sm border-0 rounded-4 p-3">
 
